@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Metric | Automated Competitive Telemetry</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23111111%22/></svg>">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <!-- Scripts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#f1edec",
+            "secondary": "#5f5e5e",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c4c7c7",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#c8c6c5",
+            "on-surface": "#111111",
+            "surface-container-high": "#ebe7e6",
+            "secondary-fixed-dim": "#c8c6c6",
+            "on-secondary-fixed": "#1b1c1c",
+            "tertiary-fixed": "#e6e1df",
+            "surface-dim": "#ddd9d8",
+            "surface-bright": "#fdf8f8",
+            "surface-container-low": "#f7f3f2",
+            "on-primary-container": "#858383",
+            "surface-variant": "#e5e2e1",
+            "on-secondary-container": "#1d1c1c",
+            "on-tertiary": "#ffffff",
+            "error-container": "#ffdad6",
+            "outline": "#757877",
+            "on-primary-fixed": "#101314",
+            "primary": "#323030",
+            "on-surface-variant": "#444747",
+            "secondary-container": "#e8e1e0",
+            "tertiary": "#5f5e5e",
+            "primary-container": "#e6e2e1",
+            "primary-fixed": "#e6e2e1",
+            "inverse-surface": "#2f3131",
+            "on-surface-fixed": "#1b1b1b",
+            "on-surface-fixed-variant": "#474747",
+            "on-primary-fixed-dim": "#494746",
+            "secondary-fixed": "#e7e2e1",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-dim": "#4a4746",
+            "error": "#ba1a1a",
+            "surface": "#F7F5F0",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#878280",
+            "tertiary-container": "#e8e1df",
+            "inverse-on-surface": "#f0f1f1",
+            "surface-container-medium": "#ebe7e6"
+          },
+          fontFamily: {
+            sans: ["'Hanken Grotesk'", "sans-serif"],
+            serif: ["'Source Serif 4'", "serif"],
+            mono: ["'Geist'", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F7F5F0;
+      color: #111111;
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+    .editorial-card {
+      background-color: #F3F2EE;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .editorial-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.06);
+      background-color: #ffffff;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .delay-100 { transition-delay: 200ms; }
+    .delay-200 { transition-delay: 400ms; }
+    .delay-300 { transition-delay: 600ms; }
+    .delay-400 { transition-delay: 800ms; }
+    .delay-500 { transition-delay: 1000ms; }
+
+    /* Flow timeline bullet pulses */
+    .pulse-dot {
+      position: relative;
+    }
+    .pulse-dot::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid #111111;
+      border-radius: inherit;
+      animation: radar-pulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+    @keyframes radar-pulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* Scroll reveal transitions */
+    .scroll-reveal {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(40px);
+      transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                  filter 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, filter, transform;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  </style></head>
+<body class="min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <!-- Header -->
+  <header class="border-b border-outline-variant/30 py-6 px-8 md:px-16 flex justify-between items-center bg-white fixed top-0 w-full z-50">
+    <div class="flex items-center gap-8">
+      <a href="#" class="font-serif text-2xl font-bold tracking-tight text-primary">Metric</a>
+      <nav class="hidden md:flex gap-8">
+        <a href="#features" class="font-label-ui text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">Telemetry Channels</a>
+        <a href="#architecture" class="font-label-ui text-xs uppercase tracking-widest text-secondary hover:text-primary transition-colors">Our Workflow</a>
+      </nav>
+    </div>
+    <div>
+      <a href="dashboard.html" class="border border-primary px-6 py-2.5 font-label-ui text-[11px] uppercase tracking-widest text-primary hover:bg-primary hover:text-on-primary transition-colors">
+        Enter Platform
+      </a>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="pt-36 pb-20 px-8 md:px-16 flex flex-col items-center text-center mt-20">
+    <div class="max-w-3xl">
+      <span class="text-xs font-mono uppercase tracking-[0.2em] text-secondary block mb-4 scroll-reveal">Competitor Monitoring Workspace</span>
+      <h1 class="font-serif text-5xl md:text-7xl text-primary font-bold leading-tight mb-8 scroll-reveal delay-100">Your business analyst. In your hands.</h1>
+      <p class="font-body-lg text-body-lg text-secondary leading-relaxed mb-6 max-w-xl mx-auto scroll-reveal delay-200">
+        Metric processes the chaos of the market and delivers the strategy straight to your screen. It tracks competitor code updates, hiring surges, and product shifts in real time. Brilliant. Effortless. And entirely automated.
+      </p>
+
+      <!-- Core Pillars list -->
+      <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-10 mt-4 border-t border-b border-outline-variant/20 py-8 scroll-reveal delay-300">
+        <div>
+          <h4 class="font-serif font-bold text-primary text-sm uppercase tracking-wider mb-2">Real-time Stream</h4>
+          <p class="text-xs text-secondary leading-relaxed">It functions like a curated news feed specifically for competitor moves—showing when they launch new features or change their pricing.</p>
+        </div>
+        <div>
+          <h4 class="font-serif font-bold text-primary text-sm uppercase tracking-wider mb-2">AI Briefings</h4>
+          <p class="text-xs text-secondary leading-relaxed">It compiles everything that happened during the week into an executive-summary report, pointing out active competitors and threats.</p>
+        </div>
+        <div>
+          <h4 class="font-serif font-bold text-primary text-sm uppercase tracking-wider mb-2">Searchable Archive</h4>
+          <p class="text-xs text-secondary leading-relaxed">It logs competitor history so you can filter by enterprise (OpenAI, Perplexity) or channel to research past patterns.</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 scroll-reveal delay-400">
+        <a href="dashboard.html" class="bg-primary text-on-primary px-8 py-4 font-label-ui text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">
+          Access Precision Workspace
+        </a>
+        <a href="#features" class="border border-outline-variant px-8 py-4 font-label-ui text-xs uppercase tracking-widest text-primary hover:bg-black/5 transition-colors">
+          Explore Telemetry
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Health Stats Panel -->
+  <section class="px-8 md:px-16 mb-24 scroll-reveal delay-500 stats-section">
+    <div class="max-w-4xl mx-auto border border-outline-variant/20 bg-surface-container-low p-8 rounded shadow-sm">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-outline-variant/20">
+        <div class="py-4 md:py-0 md:px-4">
+          <span class="block font-serif text-3xl font-bold text-primary count-up" data-target="12" data-suffix="ms">0ms</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-secondary block mt-1">Pipeline Latency</span>
+        </div>
+        <div class="py-4 md:py-0 md:px-4">
+          <span class="block font-serif text-3xl font-bold text-primary count-up" data-target="99.98" data-decimals="2" data-suffix="%">0.00%</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-secondary block mt-1">Model Node Uptime</span>
+        </div>
+        <div class="py-4 md:py-0 md:px-4">
+          <span class="block font-serif text-3xl font-bold text-primary count-up" data-target="4.2" data-decimals="1" data-suffix=" TB/s">0.0 TB/s</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-secondary block mt-1">Neural Throughput</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Core Features / Channels Section -->
+  <section id="features" class="py-20 px-8 md:px-16 bg-white border-y border-outline-variant/20">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-2">Omnipresent Tracking</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-primary font-bold">Comprehensive Stream Scrapers</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">Pricing Strategy</h3>
+            <p class="text-secondary text-sm leading-relaxed">Tracks changes to pricing tiers, models, and utility structures using dynamic HTML hash comparisons.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">Pricing Snapshots</span>
+        </div>
+
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">Talent Acquisition</h3>
+            <p class="text-secondary text-sm leading-relaxed">Monitors Greenhouse and Lever listings to identify hiring spikes and core engineering expansions.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">Jobs Board APIs</span>
+        </div>
+
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">Open Source Activity</h3>
+            <p class="text-secondary text-sm leading-relaxed">Tracks tagged GitHub releases and repositories for active code and open-weights model deployments.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">GitHub Organization Events</span>
+        </div>
+
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">Product Announcements</h3>
+            <p class="text-secondary text-sm leading-relaxed">Parses active competitor blogs and RSS feeds using LLM categorizations to register launches.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">RSS & Engineering Blogs</span>
+        </div>
+
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">User Feedback Trends</h3>
+            <p class="text-secondary text-sm leading-relaxed">Extracts reviews from G2, calculating strategic sentiments and mapping concerns or bugs.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">G2 Review Portals</span>
+        </div>
+
+        <div class="editorial-card scroll-reveal p-8 flex flex-col justify-between min-h-[220px]">
+          <div>
+            <h3 class="font-serif text-lg font-bold text-primary mb-3">Cognitive Briefing</h3>
+            <p class="text-secondary text-sm leading-relaxed">Synthesizes telemetry entries into executive reports detailing key competitor shifts.</p>
+          </div>
+          <span class="text-[10px] font-mono text-secondary uppercase tracking-widest mt-6">LLM Synthesis Engine</span>
+        </div>
+      </div>    </div>
+  </section>
+
+  <!-- Architecture / Flow Section -->
+  <section id="architecture" class="py-24 px-8 md:px-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-2">Automated Pipeline</span>
+        <h2 class="font-serif text-3xl md:text-4xl text-primary font-bold">The Pipeline Workflow</h2>
+      </div>
+      <div class="space-y-12">
+        <div class="flex flex-col md:flex-row items-start gap-8 border-b border-outline-variant/10 pb-8 scroll-reveal">
+          <div class="w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-serif text-xl font-bold flex-shrink-0 pulse-dot">1</div>
+          <div>
+            <h3 class="font-serif text-xl font-bold mb-2">Data Scraping Ingestion</h3>
+            <p class="text-secondary text-body-md leading-relaxed">n8n orchestrators trigger periodic runs to scrape raw updates across RSS, GitHub, Greenhouse, and G2 APIs.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start gap-8 border-b border-outline-variant/10 pb-8 scroll-reveal">
+          <div class="w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-serif text-xl font-bold flex-shrink-0 pulse-dot">2</div>
+          <div>
+            <h3 class="font-serif text-xl font-bold mb-2">LLM Transformation</h3>
+            <p class="text-secondary text-body-md leading-relaxed">Raw texts are parsed using Large Language Models to calculate magnitude scores, flag strategic implications, and extract insight summaries.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start gap-8 scroll-reveal">
+          <div class="w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-serif text-xl font-bold flex-shrink-0 pulse-dot">3</div>
+          <div>
+            <h3 class="font-serif text-xl font-bold mb-2">Dashboard Compilation</h3>
+            <p class="text-secondary text-body-md leading-relaxed">Insights land directly in the Postgres database, generating responsive timeline feeds and reports for immediate executive review.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-outline-variant/20 py-12 px-8 md:px-16 bg-white text-center">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <span class="font-serif text-xl font-bold tracking-tight text-primary">Metric</span>
+      <span class="text-xs font-mono uppercase text-secondary">Precision Competitive Intelligence Workspace</span>
+    </div>
+  </footer>
+
+  <!-- Intersection Observer Script -->
+  <script>
+    function animateValue(obj, start, end, duration, decimals = 0, suffix = "") {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        // Easing function: ease-out quadratic (starts fast, slows down at target)
+        const easedProgress = progress * (2 - progress);
+        const current = start + easedProgress * (end - start);
+        obj.innerHTML = current.toFixed(decimals) + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            if (entry.target.classList.contains('stats-section')) {
+              if (!entry.target.dataset.animated) {
+                entry.target.dataset.animated = "true";
+                document.querySelectorAll('.count-up').forEach(el => {
+                  const target = parseFloat(el.getAttribute('data-target'));
+                  const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+                  const suffix = el.getAttribute('data-suffix') || '';
+                  animateValue(el, 0, target, 2000, decimals, suffix);
+                });
+              }
+            }
+          } else {
+            entry.target.classList.remove("revealed");
+            if (entry.target.classList.contains('stats-section')) {
+              entry.target.removeAttribute('data-animated');
+              document.querySelectorAll('.count-up').forEach(el => {
+                const suffix = el.getAttribute('data-suffix') || '';
+                const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+                el.innerHTML = (0).toFixed(decimals) + suffix;
+              });
+            }
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -60px 0px"
+      });
+
+      document.querySelectorAll(".scroll-reveal").forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

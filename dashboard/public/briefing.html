@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CI Engine | Strategic Executive Briefing</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23111111%22/></svg>">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  
+  <!-- Scripts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#f1edec",
+            "secondary": "#5f5e5e",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c4c7c7",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#c8c6c5",
+            "on-surface": "#111111",
+            "surface-container-high": "#ebe7e6",
+            "secondary-fixed-dim": "#c8c6c6",
+            "on-secondary-fixed": "#1b1c1c",
+            "tertiary-fixed": "#e6e1df",
+            "surface-dim": "#ddd9d8",
+            "surface-bright": "#fdf8f8",
+            "surface-container-low": "#f7f3f2",
+            "on-primary-container": "#858383",
+            "surface-variant": "#e5e2e1",
+            "on-secondary-container": "#1d1c1c",
+            "on-tertiary": "#ffffff",
+            "error-container": "#ffdad6",
+            "outline": "#757877",
+            "on-primary-fixed": "#101314",
+            "primary": "#323030",
+            "on-surface-variant": "#444747",
+            "secondary-container": "#e8e1e0",
+            "tertiary": "#5f5e5e",
+            "primary-container": "#e6e2e1",
+            "primary-fixed": "#e6e2e1",
+            "inverse-surface": "#2f3131",
+            "on-surface-fixed": "#1b1b1b",
+            "on-surface-fixed-variant": "#474747",
+            "on-primary-fixed-dim": "#494746",
+            "secondary-fixed": "#e7e2e1",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-dim": "#4a4746",
+            "error": "#ba1a1a",
+            "surface": "#fdf8f8",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#878280",
+            "tertiary-container": "#e8e1df",
+            "inverse-on-surface": "#f0f1f1",
+            "surface-container-medium": "#ebe7e6"
+          },
+          fontFamily: {
+            sans: ["'Hanken Grotesk'", "sans-serif"],
+            serif: ["'Source Serif 4'", "serif"],
+            mono: ["'Geist'", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #F7F5F0;
+      color: #111111;
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="border-b border-outline-variant/30 py-6 px-8 md:px-16 flex justify-between items-center bg-white">
+    <div class="flex items-center gap-3">
+      <a href="dashboard.html" class="flex items-center gap-2 text-primary hover:text-black transition-colors font-bold uppercase tracking-widest text-sm">
+        <span class="material-symbols-outlined text-lg">arrow_back</span> Return to Dashboard
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-xs font-mono uppercase text-secondary">Secured Environment</span>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow max-w-4xl mx-auto w-full px-6 py-12">
+    <!-- Meta details card -->
+    <div id="briefing-meta-header" class="border border-outline-variant/20 bg-surface-container-low p-8 mb-12 animate-fade-in-up">
+      <div class="flex flex-wrap justify-between items-center gap-6">
+        <div>
+          <span id="briefing-date-range" class="text-xs font-mono uppercase tracking-widest text-secondary block mb-2">Loading briefing details...</span>
+          <h1 class="font-serif text-3xl md:text-4xl text-primary font-bold leading-tight">Strategic Intel Briefing</h1>
+        </div>
+        <div class="flex gap-4">
+          <div class="bg-white/80 border border-outline-variant/10 px-6 py-4 text-center">
+            <span id="briefing-signals-count" class="block font-serif text-2xl font-bold text-primary">-</span>
+            <span class="text-[9px] font-mono uppercase tracking-widest text-secondary">Signals Compiled</span>
+          </div>
+          <div class="bg-white/80 border border-outline-variant/10 px-6 py-4 text-center">
+            <span id="briefing-top-target" class="block font-serif text-2xl font-bold text-primary">-</span>
+            <span class="text-[9px] font-mono uppercase tracking-widest text-secondary">Top Competitor</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Executive Summary Box -->
+    <div id="exec-summary-box" class="bg-white border border-outline-variant/10 p-8 mb-12 shadow-sm rounded">
+      <h2 class="font-serif text-xl font-bold mb-4 text-primary">Executive Summary</h2>
+      <div id="exec-summary-content" class="text-secondary leading-relaxed text-body-md">
+        Loading summary...
+      </div>
+    </div>
+
+    <!-- Competitor Tabs (Layer 1) -->
+    <div class="mb-6 border-b border-outline-variant/30 flex flex-wrap gap-2" id="competitor-tabs-container">
+      <!-- Competitor Tab Buttons -->
+    </div>
+
+    <!-- Source Sub-Tabs (Layer 2) -->
+    <div class="mb-8 border-b border-outline-variant/20 flex flex-wrap gap-4" id="source-tabs-container">
+      <!-- Source Tab Buttons -->
+    </div>
+
+    <!-- Content Panel -->
+    <div id="tab-content-panel" class="bg-white border border-outline-variant/15 p-8 shadow-sm min-h-[250px]">
+      <!-- Content loaded based on tabs -->
+    </div>
+  </main>
+
+  <script>
+    let state = {
+      competitors: [],
+      brief: null,
+      signals: [],
+      selectedCompetitor: '',
+      selectedSource: 'blog'
+    };
+
+    const sourcesList = [
+      { id: 'blog', label: 'Blogs & RSS' },
+      { id: 'github', label: 'GitHub Activity' },
+      { id: 'pricing', label: 'Pricing Strategy' },
+      { id: 'reviews', label: 'G2 Reviews' },
+      { id: 'jobs', label: 'Talent Acquisition' }
+    ];
+
+    async function initBriefing() {
+      const params = new URLSearchParams(window.location.search);
+      const index = parseInt(params.get('index') || '0', 10);
+      
+      try {
+        // 1. Fetch competitors
+        const compRes = await fetch('/api/competitors');
+        state.competitors = await compRes.json();
+
+        // 2. Fetch briefings
+        const briefRes = await fetch('/api/briefings');
+        const briefings = await briefRes.json();
+        state.brief = briefings[index];
+
+        if (!state.brief) {
+          document.getElementById('exec-summary-content').innerHTML = `
+            <p class="text-error font-medium">Briefing records could not be found.</p>
+          `;
+          return;
+        }
+
+        // Set top headers
+        const start = new Date(state.brief.period_start).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const end = new Date(state.brief.period_end).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.getElementById('briefing-date-range').innerText = `Period: ${start} - ${end}`;
+        document.getElementById('briefing-signals-count').innerText = state.brief.signal_count;
+        document.getElementById('briefing-top-target').innerText = state.brief.top_competitor || 'None';
+
+        // Extract Executive Summary from markdown
+        let rawMarkdown = state.brief.briefing_markdown;
+        rawMarkdown = rawMarkdown.replace(/[\uD800-\uDFFF]./g, ''); // strip emojis
+        
+        let execSummaryHtml = '';
+        if (rawMarkdown.includes('### Executive Summary')) {
+          execSummaryHtml = marked.parse(rawMarkdown.split('### Executive Summary')[1].split('##')[0] || '');
+        } else if (rawMarkdown.includes('Executive Summary')) {
+          execSummaryHtml = marked.parse(rawMarkdown.split('Executive Summary')[1].split('##')[0] || '');
+        } else {
+          execSummaryHtml = marked.parse(rawMarkdown.split('##')[0] || 'Weekly summary has been compiled.');
+        }
+        document.getElementById('exec-summary-content').innerHTML = execSummaryHtml;
+
+        // 3. Fetch signals to populate tabs dynamically
+        const sigRes = await fetch('/api/signals');
+        const allSignals = await sigRes.json();
+
+        // Filter signals matching this briefing period
+        const periodStart = new Date(state.brief.period_start);
+        const periodEnd = new Date(state.brief.period_end);
+
+        state.signals = allSignals.filter(sig => {
+          const d = new Date(sig.signal_date);
+          return d >= periodStart && d <= periodEnd;
+        });
+
+        // Set default competitor selection
+        if (state.competitors.length > 0) {
+          state.selectedCompetitor = state.competitors[0].slug;
+        }
+
+        renderCompetitorTabs();
+        renderSourceTabs();
+        renderTabContent();
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('exec-summary-content').innerText = "Failed to load dynamic weekly briefings dataset.";
+      }
+    }
+
+    function renderCompetitorTabs() {
+      const container = document.getElementById('competitor-tabs-container');
+      container.innerHTML = '';
+
+      state.competitors.forEach(comp => {
+        const btn = document.createElement('button');
+        const isActive = state.selectedCompetitor === comp.slug;
+        btn.className = `px-6 py-3 font-label-ui text-label-ui uppercase tracking-wider transition-all border-b-2 ${
+          isActive 
+            ? 'border-primary text-primary font-bold' 
+            : 'border-transparent text-secondary hover:text-primary'
+        }`;
+        btn.innerText = comp.name;
+        btn.addEventListener('click', () => {
+          state.selectedCompetitor = comp.slug;
+          renderCompetitorTabs();
+          renderTabContent();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderSourceTabs() {
+      const container = document.getElementById('source-tabs-container');
+      container.innerHTML = '';
+
+      sourcesList.forEach(src => {
+        const btn = document.createElement('button');
+        const isActive = state.selectedSource === src.id;
+        btn.className = `px-4 py-2 font-label-ui text-xs uppercase tracking-widest transition-all ${
+          isActive 
+            ? 'text-primary border-b border-primary font-bold' 
+            : 'text-secondary hover:text-primary'
+        }`;
+        btn.innerText = src.label;
+        btn.addEventListener('click', () => {
+          state.selectedSource = src.id;
+          renderSourceTabs();
+          renderTabContent();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderTabContent() {
+      const panel = document.getElementById('tab-content-panel');
+      panel.innerHTML = '';
+
+      // Find signals for selected competitor and source
+      const filtered = state.signals.filter(s => 
+        (s.competitor_slug === state.selectedCompetitor || s.competitor_slug === state.selectedCompetitor.replace(/\s+/g, '-')) && 
+        s.source === state.selectedSource
+      );
+
+      if (filtered.length === 0) {
+        panel.innerHTML = `
+          <div class="py-8 text-center text-secondary text-body-md italic">
+            Nothing new this week
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach((sig, idx) => {
+        const block = document.createElement('div');
+        block.className = "border-b border-outline-variant/10 pb-6 mb-6 last:border-b-0 last:pb-0";
+        
+        const cardId = `collapse-card-${idx}`;
+        const metaId = `collapse-meta-${idx}`;
+
+        block.innerHTML = `
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">
+                ${new Date(sig.signal_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' })}
+              </span>
+              <h3 class="font-serif text-lg font-bold text-primary">${sig.extracted_insight}</h3>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[10px] font-mono border border-primary/20 px-2 py-0.5 uppercase">
+                Mag: ${sig.magnitude}
+              </span>
+            </div>
+          </div>
+          
+          <p class="text-body-md text-secondary leading-relaxed mb-4">
+            <strong class="text-primary font-medium block text-xs uppercase tracking-wider mb-1">Strategic Implication:</strong>
+            ${sig.strategic_implication || 'No strategic implications reported.'}
+          </p>
+
+          <!-- Accordion Dropdown Trigger -->
+          <div>
+            <button class="flex items-center text-xs font-mono uppercase text-primary hover:text-black font-semibold" onclick="toggleDetails('${metaId}')">
+              <span class="material-symbols-outlined mr-1 text-[16px]">expand_more</span> View Raw Content & Metadata
+            </button>
+            <div id="${metaId}" class="hidden mt-4 p-4 bg-surface-container-low border border-outline-variant/10 text-xs font-mono text-secondary max-h-60 overflow-y-auto whitespace-pre-wrap">
+${JSON.stringify(sig.metadata || {}, null, 2)}
+            </div>
+          </div>
+        `;
+        panel.appendChild(block);
+      });
+    }
+
+    window.toggleDetails = function(elementId) {
+      const el = document.getElementById(elementId);
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+      } else {
+        el.classList.add('hidden');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', initBriefing);
+  </script>
+</body>
+</html>

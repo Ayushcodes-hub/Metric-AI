@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Metric | Executive Competitive Intelligence</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23111111%22/></svg>">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <!-- Scripts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Marked Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Tailwind Configuration -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#f1edec",
+            "secondary": "#5f5e5e",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c4c7c7",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#c8c6c5",
+            "on-surface": "#111111",
+            "surface-container-high": "#ebe7e6",
+            "secondary-fixed-dim": "#c8c6c6",
+            "on-secondary-fixed": "#1b1c1c",
+            "tertiary-fixed": "#e6e1df",
+            "surface-dim": "#ddd9d8",
+            "surface-bright": "#fdf8f8",
+            "surface-container-low": "#f7f3f2",
+            "on-primary-container": "#858383",
+            "surface-variant": "#e5e2e1",
+            "on-error": "#ffffff",
+            "surface-container-highest": "#e5e2e1",
+            "primary": "#000000",
+            "on-tertiary-fixed-variant": "#484645",
+            "tertiary-fixed-dim": "#cac6c3",
+            "error": "#ba1a1a",
+            "primary-container": "#1c1b1b",
+            "primary-fixed": "#e5e2e1",
+            "on-primary-fixed": "#1c1b1b",
+            "on-secondary-container": "#656464",
+            "on-primary": "#ffffff",
+            "inverse-on-surface": "#f4f0ef",
+            "tertiary-container": "#1d1b1a",
+            "surface": "#F7F5F0",
+            "secondary-fixed": "#e4e2e1",
+            "on-background": "#111111",
+            "on-surface-variant": "#444748",
+            "on-secondary-fixed-variant": "#474747",
+            "background": "#F7F5F0",
+            "on-tertiary-fixed": "#1d1b1a",
+            "on-primary-fixed-variant": "#474646",
+            "on-tertiary-container": "#868381",
+            "inverse-surface": "#313030",
+            "error-container": "#ffdad6",
+            "secondary-container": "#e4e2e1",
+            "outline": "#747878",
+            "tertiary": "#000000",
+            "surface-tint": "#5f5e5e",
+            "inverse-primary": "#c8c6c5",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "section-gap": "4rem",
+            "stack-margin": "0.75rem",
+            "rail-width": "280px",
+            "element-gap": "1.5rem",
+            "content-padding": "3rem",
+            "container-max-width": "1200px"
+          },
+          "fontFamily": {
+            "display-hero": ["\"Source Serif 4\""],
+            "headline-md": ["\"Source Serif 4\""],
+            "display-hero-mobile": ["\"Source Serif 4\""],
+            "body-md": ["Hanken Grotesk"],
+            "label-ui": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "meta-data": ["Geist"]
+          },
+          "fontSize": {
+            "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+            "display-hero-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-ui": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "meta-data": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F7F5F0;
+      color: #111111;
+    }
+    .editorial-card, .signal-card {
+      background-color: #F3F2EE;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .editorial-card:hover, .signal-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+    }
+
+    .rail-item-active {
+      font-weight: 700;
+      color: #000000;
+      border-left: 2px solid #000000;
+      padding-left: 1rem;
+      margin-left: -1rem;
+    }
+
+    .module-fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideUpFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+
+    .kinetic-container {
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #e5e2e1; }
+
+    /* Custom Checkbox */
+    .custom-checkbox {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #111111;
+      background-color: transparent;
+      display: inline-grid;
+      place-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .custom-checkbox:checked {
+      background-color: #111111;
+    }
+    .custom-checkbox:checked::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background-color: white;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+
+    .diff-added { background-color: rgba(74, 222, 128, 0.1); color: #166534; }
+    .diff-removed { background-color: rgba(248, 113, 113, 0.1); color: #991b1b; }
+  </style>
+</head>
+<body class="font-body-md bg-background text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <!-- Left Sidebar Navigation -->
+  <aside id="sidebar" class="fixed left-0 top-0 h-full w-[280px] border-r border-outline-variant bg-surface flex flex-col py-10 px-8 z-50 transition-transform duration-300 -translate-x-full md:translate-x-0">
+    <div class="mb-16">
+      <h1 class="font-display-hero text-[24px] text-primary tracking-tight leading-tight">Metric</h1>
+      <p class="font-meta-data text-meta-data text-secondary uppercase opacity-60 mt-1">Precision Insight Engine</p>
+    </div>
+    <nav class="flex-1 space-y-6" id="sidebar-nav">
+      <a class="flex items-center gap-4 text-primary font-bold rail-item-active transition-all duration-300 group" href="#stream" data-tab="stream">
+        <span class="material-symbols-outlined text-[20px]">psychology</span>
+        <span class="font-label-ui text-label-ui uppercase">Intelligence</span>
+      </a>
+      <a class="flex items-center gap-4 text-secondary hover:text-on-surface transition-all duration-300 group" href="#reports" data-tab="reports">
+        <span class="material-symbols-outlined text-[20px]">assessment</span>
+        <span class="font-label-ui text-label-ui uppercase">Reports</span>
+      </a>
+      <a class="flex items-center gap-4 text-secondary hover:text-on-surface transition-all duration-300 group" href="#competitors" data-tab="competitors">
+        <span class="material-symbols-outlined text-[20px]">domain</span>
+        <span class="font-label-ui text-label-ui uppercase">Competitors</span>
+      </a>
+      <a class="flex items-center gap-4 text-secondary hover:text-on-surface transition-all duration-300 group" href="#status" data-tab="status">
+        <span class="material-symbols-outlined text-[20px]">radar</span>
+        <span class="font-label-ui text-label-ui uppercase">Signal Status</span>
+      </a>
+      <a class="flex items-center gap-4 text-secondary hover:text-on-surface transition-all duration-300 group" href="#health" data-tab="health">
+        <span class="material-symbols-outlined text-[20px]">health_and_safety</span>
+        <span class="font-label-ui text-label-ui uppercase">System Health</span>
+      </a>
+      <a class="flex items-center gap-4 text-secondary hover:text-on-surface transition-all duration-300 group" href="#filters" data-tab="filters">
+        <span class="material-symbols-outlined text-[20px]">history_toggle_off</span>
+        <span class="font-label-ui text-label-ui uppercase">History Filters</span>
+      </a>
+    </nav>
+    <div class="pt-10 mt-auto border-t border-black/5 space-y-8">
+      <button class="w-full bg-primary text-on-primary py-4 px-4 font-label-ui text-label-ui uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 transition-opacity" id="btn-run-synthesis">
+        <span class="material-symbols-outlined text-[18px]">add</span>
+        RUN SYNTHESIS
+      </button>
+    </div>
+  </aside>
+
+  <!-- Sidebar Mobile Overlay -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/30 z-45 hidden"></div>
+
+  <!-- Top App Bar -->
+  <header class="fixed top-0 right-0 left-0 md:left-[280px] z-40 bg-surface/90 backdrop-blur-xl border-b border-black/5 h-20 flex items-center justify-between px-6 md:px-content-padding">
+    <div class="flex items-center gap-4 md:gap-12">
+      <button class="md:hidden flex items-center text-primary mr-2" id="btn-mobile-menu">
+        <span class="material-symbols-outlined text-[28px]">menu</span>
+      </button>
+      <span class="font-display-hero text-[18px] md:text-[24px] text-primary truncate" id="dashboard-title">Intelligence Dashboard</span>
+      <nav class="hidden md:flex gap-8">
+        <a class="font-label-ui text-label-ui uppercase text-secondary hover:text-primary transition-colors cursor-pointer" href="#stream" onclick="window.switchTab('stream')">Overview</a>
+        <a class="font-label-ui text-label-ui uppercase text-secondary hover:text-primary transition-colors cursor-pointer" href="#status" onclick="window.switchTab('status')">Live Feed</a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-3 md:gap-6">
+      <div class="relative group hidden sm:block">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary opacity-50 text-[20px]">search</span>
+        <input class="bg-black/5 border-none focus:ring-0 w-48 md:w-72 h-10 pl-10 pr-4 font-body-md text-[13px] placeholder:text-secondary/50" placeholder="Search archive..." type="text" id="workspace-search">
+      </div>
+      <button class="border border-primary px-3 md:px-6 py-2 font-label-ui text-[10px] md:text-[11px] uppercase tracking-widest text-primary hover:bg-primary hover:text-on-primary transition-colors" id="btn-sync">Sync Data</button>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="ml-0 md:ml-[280px] pt-20 min-h-screen kinetic-container">
+    <div class="max-w-container-max-width mx-auto px-4 md:px-content-padding py-12 md:py-24">
+
+      <!-- Panel: Stream (Weekly Stance & Stream) -->
+      <div id="panel-stream" class="tab-panel hidden">
+        <!-- Hero Section -->
+        <section class="mb-20 animate-[fadeInHeader_0.8s_ease-out]">
+          <div class="max-w-3xl">
+            <p class="font-meta-data text-secondary uppercase tracking-[0.2em] mb-4">Perspective // Current Cycle</p>
+            <h2 class="font-display-hero text-display-hero mb-6">Weekly Stance</h2>
+            <p class="font-body-lg text-body-lg leading-relaxed text-[#444444]" id="stream-stance-text">
+              Loading weekly stance...
+            </p>
+          </div>
+        </section>
+
+        <!-- Intelligence Stream -->
+        <div class="space-y-8 relative" id="stream-timeline-container">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Panel: Signal Status -->
+      <div id="panel-status" class="tab-panel hidden">
+        <section class="mb-12">
+          <div class="flex items-end justify-between border-b-2 border-primary pb-8">
+            <div>
+              <p class="font-meta-data text-meta-data text-secondary uppercase mb-2">SYSTEM MONITORING // ACTIVE CHANNELS</p>
+              <h2 class="font-display-hero text-display-hero">Active Intelligence Monitoring</h2>
+            </div>
+            <div class="text-right">
+              <div class="flex items-center gap-2 mb-1 justify-end">
+                <span class="w-3 h-3 bg-green-400 rounded-full status-pulse"></span>
+                <span class="font-label-ui text-label-ui text-primary uppercase">Core Engine Stabilized</span>
+              </div>
+              <p class="font-meta-data text-meta-data text-secondary" id="last-sync-time">Last synchronized: Just now</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-element-gap" id="status-grid-container">
+          <!-- Grid items dynamically rendered -->
+        </section>
+      </div>
+
+      <!-- Panel: System Health -->
+      <div id="panel-health" class="tab-panel hidden">
+        <section class="mb-20">
+          <p class="font-meta-data text-secondary uppercase tracking-[0.3em] mb-6 italic">Core Infrastructure // Operational State</p>
+          <h1 class="font-display-hero text-display-hero mb-12 leading-tight">System Status Overview</h1>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="editorial-card p-10 flex flex-col justify-between h-48 group">
+              <p class="font-meta-data text-secondary uppercase tracking-widest text-[11px] mb-4">Signal Latency</p>
+              <div class="flex items-baseline justify-between mt-auto">
+                <span class="font-display-hero text-[42px] leading-none">12ms</span>
+                <span class="font-label-ui text-[11px] tracking-widest bg-white/50 px-2 py-1 border border-black/5 text-green-700 font-bold uppercase">OPTIMAL</span>
+              </div>
+            </div>
+            <div class="editorial-card p-10 flex flex-col justify-between h-48 group">
+              <p class="font-meta-data text-secondary uppercase tracking-widest text-[11px] mb-4">Model Uptime</p>
+              <div class="flex items-baseline justify-between mt-auto">
+                <span class="font-display-hero text-[42px] leading-none">99.98%</span>
+                <span class="font-meta-data text-[10px] text-secondary/60 italic">LAST 30 DAYS</span>
+              </div>
+            </div>
+            <div class="editorial-card p-10 flex flex-col justify-between h-48 group">
+              <p class="font-meta-data text-secondary uppercase tracking-widest text-[11px] mb-4">Neural Throughput</p>
+              <div class="flex items-baseline justify-between mt-auto">
+                <span class="font-display-hero text-[42px] leading-none">4.2 TB/s</span>
+                <span class="font-label-ui text-[11px] tracking-widest bg-primary text-on-primary px-2 py-1 font-bold uppercase">PEAK</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Detailed Diagnostics -->
+        <section class="space-y-8">
+          <div class="flex items-end justify-between mb-12">
+            <h3 class="font-display-hero text-[28px]">Infrastructure Diagnostics</h3>
+            <div class="flex gap-4">
+              <button class="text-[11px] font-label-ui uppercase tracking-widest border border-primary/20 px-6 py-2 hover:bg-primary hover:text-on-primary transition-all" id="btn-export-logs">Export Logs</button>
+            </div>          </div>
+
+          <div class="editorial-card p-12 flex flex-col md:flex-row justify-between items-start md:items-center group">
+            <div class="max-w-xl">
+              <p class="font-meta-data text-secondary uppercase tracking-widest text-[11px] mb-3 italic">SUBSYSTEM // AGENT_CLUSTER_01</p>
+              <h4 class="font-display-hero text-[32px] mb-4 group-hover:text-primary transition-colors">Autonomous Agent Cluster</h4>
+              <p class="font-body-md text-on-surface/70 text-[17px] leading-relaxed">Active processing of unstructured competitive intelligence across 400 localized neural nodes. High efficiency detected in sentiment analysis modules.</p>
+            </div>
+            <div class="flex items-center gap-16 mt-8 md:mt-0">
+              <div class="text-center">
+                <p class="font-meta-data text-secondary uppercase text-[10px] mb-1">CPU</p>
+                <span class="font-display-hero text-[28px]">42%</span>
+              </div>
+              <div class="text-center">
+                <p class="font-meta-data text-secondary uppercase text-[10px] mb-1">Memory</p>
+                <span class="font-display-hero text-[28px]">68.4GB</span>
+              </div>
+              <div class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.4)]"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel: Competitors Registry -->
+      <div id="panel-competitors" class="tab-panel hidden">
+        <section class="mb-20">
+          <p class="font-meta-data text-secondary uppercase tracking-[0.3em] mb-6 italic">Precision Registry // Global Competitors</p>
+          <div class="flex items-end justify-between border-b-2 border-primary pb-8">
+            <h2 class="font-display-hero text-display-hero">Competitor Registry</h2>
+            <button class="bg-primary text-on-primary px-6 py-3 font-label-ui text-[11px] uppercase tracking-widest hover:opacity-90 transition-opacity" onclick="window.openAddCompetitorModal()">+ Add Competitor</button>
+          </div>
+          <p class="font-body-lg text-body-lg text-secondary leading-relaxed mt-6 mb-12">
+            Configure dynamic telemetry streams for active AI enterprises. Only configured channels are compiled during telemetry sync cycles.
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="health-competitors-list">
+            <!-- Rendered dynamically -->
+          </div>
+        </section>
+      </div>
+
+      <div id="panel-filters" class="tab-panel hidden">
+        <section class="mb-20">
+          <div class="flex items-end justify-between border-b border-black/5 pb-12">
+            <div class="max-w-3xl">
+              <span class="font-meta-data text-meta-data text-secondary uppercase tracking-[0.3em] mb-6 block italic">Archive Series No. 14</span>
+              <h2 class="font-display-hero text-display-hero mb-6 leading-[1.1]">Historical Intelligence Log</h2>
+              <p class="font-body-lg text-body-lg text-on-surface/70">
+                Compiling intelligence streams from the last 2 weeks.
+              </p>            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-12 gap-6 md:gap-16">
+          <aside class="col-span-12 md:col-span-3 h-fit space-y-12">
+            <div>
+              <h3 class="font-label-ui text-[11px] text-primary uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+                <span class="w-1 h-1 bg-primary rounded-full"></span>
+                Enterprises
+              </h3>
+              <div class="space-y-5" id="history-competitor-checkboxes">
+                <!-- Checked values added dynamically -->
+              </div>
+            </div>
+            <div>
+              <h3 class="font-label-ui text-[11px] text-primary uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
+                <span class="w-1 h-1 bg-primary rounded-full"></span>
+                Signal Source
+              </h3>
+              <div class="space-y-5" id="history-source-checkboxes">
+                <label class="flex items-center gap-4 cursor-pointer group">
+                  <input checked class="custom-checkbox history-source-check" type="checkbox" value="pricing">
+                  <span class="font-body-md text-on-surface/80 group-hover:text-primary transition-colors text-[15px]">Pricing Strategy</span>
+                </label>
+                <label class="flex items-center gap-4 cursor-pointer group">
+                  <input checked class="custom-checkbox history-source-check" type="checkbox" value="jobs">
+                  <span class="font-body-md text-on-surface/80 group-hover:text-primary transition-colors text-[15px]">Talent Acquisition</span>
+                </label>
+                <label class="flex items-center gap-4 cursor-pointer group">
+                  <input checked class="custom-checkbox history-source-check" type="checkbox" value="github">
+                  <span class="font-body-md text-on-surface/80 group-hover:text-primary transition-colors text-[15px]">Open Source</span>
+                </label>
+                <label class="flex items-center gap-4 cursor-pointer group">
+                  <input checked class="custom-checkbox history-source-check" type="checkbox" value="blog">
+                  <span class="font-body-md text-on-surface/80 group-hover:text-primary transition-colors text-[15px]">Blog & RSS</span>
+                </label>
+                <label class="flex items-center gap-4 cursor-pointer group">
+                  <input checked class="custom-checkbox history-source-check" type="checkbox" value="reviews">
+                  <span class="font-body-md text-on-surface/80 group-hover:text-primary transition-colors text-[15px]">G2 Reviews</span>
+                </label>
+              </div>
+            </div>
+          </aside>
+ 
+          <div class="col-span-12 md:col-span-9 space-y-12" id="history-signals-timeline">
+            <!-- Historical cards list -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: Reports -->
+      <div id="panel-reports" class="tab-panel hidden">
+        <section class="mb-16">
+          <div class="max-w-3xl">
+            <p class="font-meta-data text-meta-data text-secondary uppercase tracking-[0.2em] mb-4">Central Repository // Reports</p>
+            <h2 class="font-display-hero text-display-hero text-primary mb-6">Archive of Strategic Intelligence</h2>
+            <p class="font-body-lg text-body-lg text-secondary leading-relaxed">
+              Access high-fidelity analysis spanning global market shifts, competitive maneuvers, and macroeconomic catalysts. Curated for immediate executive synthesis.
+            </p>
+          </div>
+        </section>
+
+        <!-- Briefing Split Viewer -->
+        <div class="grid grid-cols-12 gap-8" id="briefings-bento-container">
+          <!-- Populated dynamic report articles -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pricing Diff modal detail -->
+  <div id="diff-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-8">
+    <div class="bg-white max-w-2xl w-full p-8 border border-black/10">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-display-hero text-headline-md" id="diff-modal-title">Pricing Restructure Diff</h3>
+        <button class="material-symbols-outlined text-secondary hover:text-primary" onclick="window.closeDiffModal()">close</button>
+      </div>
+      <div class="font-meta-data bg-white p-6 space-y-2 border border-outline-variant/30 max-h-[60vh] overflow-y-auto" id="diff-modal-body">
+        <!-- Render lines -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Competitor Modal -->
+  <div id="add-competitor-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-8">
+    <div class="bg-white max-w-xl w-full p-8 border border-black/10">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="font-display-hero text-headline-md">Register New Competitor</h3>
+        <button class="material-symbols-outlined text-secondary hover:text-primary" onclick="window.closeAddCompetitorModal()">close</button>
+      </div>
+      
+      <!-- Input Section -->
+      <div id="comp-modal-input-section" class="space-y-4">
+        <div>
+          <label class="block text-xs font-mono uppercase text-secondary mb-2">Company Name</label>
+          <input type="text" id="add-comp-name" placeholder="e.g. Anthropic" class="w-full bg-black/5 border-none focus:ring-1 focus:ring-primary h-12 px-4 font-body-md text-sm">
+        </div>
+        <button class="w-full bg-primary text-on-primary py-4 font-label-ui text-xs uppercase tracking-widest hover:opacity-90 transition-opacity" id="btn-comp-search-discovery">Search & Discover Telemetry</button>
+      </div>
+
+      <!-- Discovery Results Section -->
+      <div id="comp-modal-results-section" class="hidden mt-6 space-y-6">
+        <div class="border-t border-outline-variant/30 pt-6">
+          <h4 class="text-xs font-mono uppercase text-secondary mb-4">Discovery Status Matrix</h4>
+          
+          <div class="space-y-3 font-body-md text-sm" id="comp-discovery-matrix">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border border-yellow-200/50 p-4 text-xs text-yellow-800 leading-relaxed uppercase tracking-wider font-mono">
+          Note: Channels marked NOT FOUND will be bypassed in the background processing pipeline automatically.
+        </div>
+
+        <div class="flex gap-4">
+          <button class="flex-1 border border-primary text-primary py-3 font-label-ui text-xs uppercase tracking-widest hover:bg-black/5 transition-colors" onclick="window.resetAddCompetitorModal()">Search Again</button>
+          <button class="flex-1 bg-primary text-on-primary py-3 font-label-ui text-xs uppercase tracking-widest hover:opacity-90 transition-opacity" id="btn-comp-confirm-register">Confirm & Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container fixed bottom-10 right-10 z-50 space-y-2" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
