@@ -1,7 +1,7 @@
 {
-  "name": "dashboard",
+  "name": "metric-ai",
   "version": "1.0.0",
-  "description": "",
+  "description": "AI-powered competitive intelligence and strategic analytics platform",
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
