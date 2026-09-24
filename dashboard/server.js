@@ -662,12 +662,18 @@ Each object must follow this schema:
       return '0.0.0.0';
     }
 
-    app.listen(port, '0.0.0.0', async () => {
-      const localIp = getLocalIp();
-      console.log(`Intel Engine dashboard running at:`);
-      console.log(`  - Local:   http://localhost:${port}`);
-      console.log(`  - Network: http://${localIp}:${port}`);
-      await initializeDatabase();
-      selfHealCompetitorSignals();
-    });
-
+if (require.main === module) {
+  app.listen(port, '0.0.0.0', async () => {
+    const localIp = getLocalIp();
+    console.log(`Metric AI dashboard running at:`);
+    console.log(`  - Local:   http://localhost:${port}`);
+    console.log(`  - Network: http://${localIp}:${port}`);
+    await initializeDatabase();
+    selfHealCompetitorSignals();
+  });
+}
+
+module.exports = app;
+
+
+
