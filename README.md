@@ -501,3 +501,31 @@ See [`LICENSE`](LICENSE) for the complete license text.
           SIGNAL → ANALYSIS
              → STRATEGY
 ```
+powershell -NoProfile -Command "$section = @'
+## Live Deployment
+
+**Production:** https://metric-five-opal.vercel.app
+
+Metric AI is deployed as a production web application using Vercel.
+
+### Deployment Architecture
+
+- **Frontend:** Static HTML, CSS and JavaScript
+- **Backend:** Node.js + Express.js
+- **API:** Vercel Node serverless function
+- **Database:** PostgreSQL
+- **Hosting:** Vercel
+- **Source Control:** Git + GitHub
+
+### Production API
+
+The application exposes backend functionality through the `/api` route, while the frontend is served from the public application interface.
+
+> Note: PostgreSQL must be configured as a production database and its credentials supplied through environment variables. Development database credentials must never be committed to the repository.
+
+### Deployment
+
+Deploy using the Vercel CLI:
+
+```bash
+vercel
